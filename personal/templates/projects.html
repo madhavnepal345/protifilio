@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Projects - Portfolio{% endblock %}
+{% block content %}
+
+<section class="py-20 px-6">
+    <h2 class="text-3xl font-bold text-center">My Projects</h2>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for project in projects %}
+        <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold">{{ project.title }}</h3>
+            <p class="mt-2 text-gray-400">{{ project.description }}</p>
+            <p class="mt-2"><strong>Tech:</strong> {{ project.technologies }}</p>
+            {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="mt-4 rounded">
+            {% endif %}
+            <a href="{{ project.project_link }}" target="_blank" class="mt-4 inline-block px-4 py-2 bg-blue-400 text-white rounded-lg">View Project</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
