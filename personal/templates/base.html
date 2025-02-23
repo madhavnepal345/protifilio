@@ -4,38 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Portfolio{% endblock %}</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body class="bg-gray-900 text-white transition duration-300">
-    <nav class="bg-gray-800 p-4 fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-blue-400">My Portfolio</a>
-            <ul class="flex space-x-6">
-                <li><a href="/" class="hover:text-blue-400">Home</a></li>
-                <li><a href="/about/" class="hover:text-blue-400">About</a></li>
-                <li><a href="/projects/" class="hover:text-blue-400">Projects</a></li>
-                <li><a href="/contact/" class="hover:text-blue-400">Contact</a></li>
-            </ul>
-        </div>
+<body class="bg-gradient-to-br from-gray-900 to-gray-700 text-white font-sans">
+
+    <nav class="flex justify-between items-center p-5 bg-gray-800 bg-opacity-60 backdrop-blur-md text-white rounded-full mx-6 mt-4 shadow-lg fixed top-4 left-1/2 transform -translate-x-1/2 w-3/4 z-50">
+        <video src="{{ portfolio.logo.url }}" class="h-12" autoplay loop muted></video>
+        <ul class="flex space-x-8 text-lg">
+            <li><a href="{% url 'home' %}" class="hover:text-teal-400 transition duration-300">Home</a></li>
+            <li><a href="{% url 'about' %}" class="hover:text-teal-400 transition duration-300">About</a></li>
+            <li><a href="{% url 'skills' %}" class="hover:text-teal-400 transition duration-300">Skills</a></li>
+            <li><a href="{% url 'resume' %}" class="hover:text-teal-400 transition duration-300">Resume</a></li>
+            <li><a href="{% url 'contact' %}" class="hover:text-teal-400 transition duration-300">Contacts</a></li>
+        </ul>
+        {% if portfolio.resume %}
+        <a href="{{ portfolio.resume.url }}" class="hover:text-teal-400 transition">Download CV</a>
+        {% endif %}
     </nav>
 
-    <div class="pt-20">
-        {% block content %} {% endblock %}
-    </div>
+    <main class="mt-20">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    <button id="toggle-theme" class="fixed bottom-5 right-5 px-4 py-2 bg-gray-700 text-white rounded-lg">🌙</button>
-
-    <footer class="bg-gray-800 text-center py-4 mt-10">
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <footer class="text-center py-6 text-gray-400">
+        &copy; 2025 Your Name. All rights reserved.
     </footer>
 
-    <script src="/static/js/scripts.js"></script>
+    <script>
+        gsap.from("nav", {duration: 1, y: -50, opacity: 0, ease: "power2.out"});
+    </script>
+
 </body>
 </html>

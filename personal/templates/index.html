@@ -1,25 +1,42 @@
 {% extends 'base.html' %}
+
 {% block title %}Home - Portfolio{% endblock %}
+
 {% block content %}
+<section class="flex h-screen text-center relative">
+    <!-- Left: Full-Screen Profile Image -->
+    <div class="w-1/2 h-screen m-0 p-0">
+        <img src="{{ portfolio.profile_image.url }}" 
+             class="w-full h-full object-cover" 
+             alt="Profile Image">
+    </div>
 
-<!-- Hero Section -->
-<section id="hero" class="text-center py-20 bg-gray-800 opacity-0 transform translate-y-10">
-    <h1 class="text-4xl font-bold">Hello, I'm <span class="text-blue-400">Your Name</span></h1>
-    <p class="mt-4 text-lg">A passionate Full-Stack Developer with expertise in Django & AI.</p>
-    <a href="/projects/" class="mt-6 inline-block px-6 py-3 bg-blue-400 text-white rounded-lg hover:scale-105 transition">View Projects</a>
+    <!-- Right: Text Content (Near Footer) -->
+    <div class="w-1/2 flex flex-col justify-end text-left pl-16 pr-12 pb-12">
+        <h1 class="text-5xl font-extrabold text-teal-400 opacity-0">Madhav Nepal</h1>
+        <p class="text-2xl text-gray-300 mt-4 opacity-0">{{ portfolio.job_title }}</p>
+        <button class="mt-6 px-8 py-3 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-110 opacity-0">
+            Get in Touch
+        </button>
+    </div>
 </section>
 
-<!-- About Section -->
-<section class="py-20 px-4 text-center">
-    <h2 class="text-3xl font-bold">About Me</h2>
-    <p class="mt-4 text-lg">I specialize in AI-powered web apps using Django and modern frontend frameworks.</p>
-    <a href="/about/" class="mt-4 inline-block px-6 py-3 bg-blue-400 text-white rounded-lg">Read More</a>
-</section>
-
+<!-- GSAP Animations -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.to("#hero", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" });
-});
-</script>
+    gsap.from("h1", {
+        duration: 1, opacity: 0, y: 50, ease: "power2.out", delay: 0.5
+    });
 
+    gsap.from("p", {
+        duration: 1, opacity: 0, y: 50, ease: "power2.out", delay: 0.8
+    });
+
+    gsap.from("button", {
+        duration: 1, opacity: 0, y: 50, scale: 0.8, ease: "back.out(1.7)", delay: 1.2
+    });
+
+    gsap.from("img", {
+        duration: 1, scale: 1.1, opacity: 0, delay: 0.5, ease: "power2.out"
+    });
+</script>
 {% endblock %}

@@ -1,9 +1,15 @@
 from django.shortcuts import render,redirect
-from .models import Project,ContactMessage
+from .models import Project,ContactMessage,Skill,Portfolio
 
 
 def home(request):
-    return render(request,'index.html')
+    portfolio = Portfolio.objects.first() 
+    return render(request,'index.html',{'portfolio':portfolio})
+
+
+def resume(request):
+    portfolio=Portfolio.objects.first()
+    return render(request,'resume.html',{'portfolio':portfolio})
 
 def about(request):
     return render(request,'about.html')
@@ -20,3 +26,9 @@ def contact(request):
         ContactMessage.objects.create(name=name,email=email,message=message)
         return redirect('contact')
     return render(request,'contact.html')
+
+
+
+def skills_view(request):
+    skills=Skill.objects.all()
+    return render(request,'skills.html',{'skills':skills})
